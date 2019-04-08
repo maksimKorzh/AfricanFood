@@ -3,13 +3,14 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+app.use(express.static(__dirname + '/client'));
 app.use(bodyParser.json());
 
 Genre = require('./models/genre');
 Book = require('./models/book');
 
 // Connect to Mongoose
-mongoose.connect('mongodb://localhost/bookstore');
+mongoose.connect('mongodb://localhost/bookstore', { useNewUrlParser: true });
 var db = mongoose.connection;
 
 app.get('/', (req, res) => res.send('Please use /api/books or /api/genres'));
